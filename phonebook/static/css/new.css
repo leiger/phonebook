@@ -1,0 +1,111 @@
+body{
+    background-color: #fff;
+}
+.header{
+    height: 50px;
+}
+.navbar h1{
+    font-size: 1.4em;
+    line-height: 50px;
+    color: #fff;
+}
+.navbar .save button{
+    color: #fff;
+    background: transparent;
+    border: none;
+}
+.main2 span{
+    font-size: 15px;
+}
+.newInfo{
+    width: 100%;
+    height: 12%;
+    position: relative;
+    top: 0px;
+    left: 0;
+}
+.newInfo .newAvatar span{
+    font-size: 60px;
+    display: block;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#name,#company,#position{
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    height: 45px;
+}
+#name,#company,#position:focus{
+    outline: none;
+    box-shadow: none;
+}
+#name{
+    border-bottom: 1px solid #0099ff;
+    margin-top: 10px;
+}
+#company,#position{
+    border-bottom: 1px solid #f5f5f5;
+}
+.newPhone{
+    position: relative;
+    top: 20px;
+    left: 0;
+}
+.newEmail{
+     position: relative;
+     top: 40px;
+     left: 0;
+ }
+.newSns{
+    position: relative;
+    top: 60px;
+    left: 0;
+}
+.newRemark{
+    position: relative;
+    top: 80px;
+    left: 0;
+}
+.infoSpan{
+    display: block;
+    font-size: 0.8em;
+    height: 40px;
+    line-height: 40px;
+    color: #999;
+    margin-left: 20px;
+}
+.newPhone .phoneLeft,.newEmail .emailLeft,.newSns .snsLeft{
+    padding-right: 0;
+}
+.newPhone .phoneRight,.newEmail .emailRight,.newSns .snsRight{
+    padding-left: 0;
+}
+.newPhone .phoneLeft input,.newEmail .emailLeft input,.newSns .snsLeft input{
+    width: 100%;
+    border: none;
+    border-right: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 10px 10px 10px 17px;
+    text-align: center;
+    font-size: 16px;
+}
+.newPhone .phoneRight input,.newEmail .emailRight input,.newSns .snsRight input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 10px 10px 10px 17px;
+    font-size: 16px;
+}
+.newRemark input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 10px 10px 10px 17px;
+    font-size: 16px;
+}
+
+
+
+

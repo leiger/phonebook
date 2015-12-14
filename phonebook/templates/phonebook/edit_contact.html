@@ -1,0 +1,240 @@
+{% extends "phonebook/base/base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %} {% trans '编辑' %} {% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static './css/new.css' %}">{% endblock %}
+
+{% block content %}
+
+  {% if contact.id %}
+  <div class="mainPage">
+    <form method="post" action="{% url 'phonebook_edit' contact_id=contact.id %}">
+      {% csrf_token %}
+
+      <header class="header">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-2 navBlock">
+                <a href="{% url 'phonebook_lists_contacts' %}">
+                  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+              </div>
+              <div class="col-xs-7">
+                <h1>修改联系人</h1>
+              </div>
+              <div class="col-xs-3 save navBlock"><button type="submit">保存</button></div>
+            </div>
+          </div>
+        </nav><!--导航条-->
+      </header><!--头部固定的导航加搜索-->
+
+      <div class="main2">
+
+        <section class="newInfo">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-4 newAvatar">
+                <span class="glyphicon glyphicon-user"></span>
+              </div>
+              <div class="col-xs-8">
+                <div class="input-group">
+                  {{ contact_form.name }}
+                  {{ contact_form.company }}
+                  {{ contact_form.position }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="newPhone">
+          <span class="infoSpan">联系电话</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-4 phoneLeft">
+                {{ contact_form.phoneType }}
+                <datalist id="phoneType">
+                  <option value="住宅"></option>
+                  <option value="公司"></option>
+                  <option value="手机"></option>
+                </datalist>
+              </div>
+              <div class="col-xs-8 phoneRight">
+                {{ contact_form.phone }}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="newEmail">
+          <span class="infoSpan">电子邮箱</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-4 emailLeft">
+                {{ contact_form.emailType }}
+                <datalist id="emailType">
+                  <option value="个人"></option>
+                  <option value="公司"></option>
+                </datalist>
+              </div>
+              <div class="col-xs-8 emailRight">
+                {{ contact_form.email }}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="newSns">
+          <span class="infoSpan">社交账号</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-4 snsLeft">
+                {{ contact_form.socialType }}
+                <datalist id="socialType">
+                  <option value="QQ"></option>
+                  <option value="微信"></option>
+                </datalist>
+              </div>
+              <div class="col-xs-8 snsRight">
+                {{ contact_form.social }}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="newRemark">
+          <span class="infoSpan">备注</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12">
+                {{ contact_form.remark }}
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </form>
+
+  </div>
+  {% endif %}
+
+  {% if not contact.id %}
+  <div class="mainPage">
+    <form action="{% url 'phonebook_new_contact' %}" method="post">
+      {% csrf_token %}
+
+      <header class="header">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-2 navBlock">
+                <a href="{% url 'phonebook_lists_contacts' %}">
+                  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+              </div>
+              <div class="col-xs-7">
+                <h1>新建联系人</h1>
+              </div>
+              <div class="col-xs-3 save navBlock"><button type="submit">保存</button></div>
+            </div>
+          </div>
+        </nav><!--导航条-->
+      </header><!--头部固定的导航加搜索-->
+
+      <div class="main2">
+
+        <section class="newInfo">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-4 newAvatar">
+                <span class="glyphicon glyphicon-user"></span>
+              </div>
+              <div class="col-xs-8">
+                <div class="input-group">
+                  {{ newcontact_form.name }}
+                  {{ newcontact_form.company }}
+                  {{ newcontact_form.position }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="newPhone">
+          <span class="infoSpan">联系电话</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-4 phoneLeft">
+                {{ newcontact_form.phoneType }}
+                <datalist id="phoneType">
+                  <option value="住宅"></option>
+                  <option value="公司"></option>
+                  <option value="手机"></option>
+                </datalist>
+              </div>
+              <div class="col-xs-8 phoneRight">
+                {{ newcontact_form.phone }}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="newEmail">
+          <span class="infoSpan">电子邮箱</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-4 emailLeft">
+                {{ newcontact_form.emailType }}
+                <datalist id="emailType">
+                  <option value="个人"></option>
+                  <option value="公司"></option>
+                </datalist>
+              </div>
+              <div class="col-xs-8 emailRight">
+                {{ newcontact_form.email }}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="newSns">
+          <span class="infoSpan">社交账号</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-4 snsLeft">
+                {{ newcontact_form.socialType }}
+                <datalist id="socialType">
+                  <option value="QQ"></option>
+                  <option value="微信"></option>
+                </datalist>
+              </div>
+              <div class="col-xs-8 snsRight">
+                {{ newcontact_form.social }}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="newRemark">
+          <span class="infoSpan">备注</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12">
+                {{ newcontact_form.remark }}
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </form>
+
+  </div>
+  {% endif %}
+  {% endblock %}
+

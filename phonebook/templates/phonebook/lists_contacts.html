@@ -1,0 +1,125 @@
+{% extends "phonebook/base/base.html" %}
+
+{% load i18n %}
+
+{% block title %} 联系人 {% endblock %}
+
+{% block content %}
+<div class="mainPage">
+
+    <header class="header">
+
+      <nav class="navbar">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-5"><a href="{% url 'phonebook_lists_contacts' %}" class="navBlock">联系人</a></div>
+            <div class="col-xs-5"><a href="{% url 'phonebook_new_contact' %}" class="navBlock">添加联系人</a></div>
+
+            <div class="col-xs-2">
+              <div class="btn-group">
+                <a href="#"  type="button" class="navBlock" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                {% if user.is_staff %}
+                  <li>
+                    <a target="_blank" href="{% url 'admin:index' %}">
+                      <span class="glyphicon glyphicon-cog"></span>
+                      Admin页面
+                    </a>
+                  </li>
+                {% endif %}
+                <li>
+                  <a href="{% url 'phonebook_logout' %}">
+                    <span class="glyphicon glyphicon-off"></span>
+                    登出
+                  </a>
+                </li><!--登出-->
+              </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </nav><!--导航条-->
+
+      <form action="{% url 'phonebook_search_contact' %}" method="post">
+        {% csrf_token %}
+        <section class="search">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        {{ search_form.query }}
+      </section><!--搜索框-->
+      </form>
+
+    </header><!--头部固定的导航加搜索-->
+
+    <div class="main">
+      <div class="clearfix"></div>
+      <section class="self">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-3 selfImage">
+              <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+            </div><!--头像-->
+            <div class="col-xs-7 selfInfo">
+              <h2>{{ user }}</h2>
+              <span>没事常联系~</span>
+            </div><!--个人信息-->
+              {% comment %}<div class="col-xs-2 selfIcon">
+                <a href="#"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></a>
+              </div><!--icon-->{% endcomment %}
+          </div>
+        </div>
+      </section>
+      <div class="clearfix"></div>
+      <section class="list">
+        <div class="slideContent">
+          <ul>
+            {% for contact in contacts %}
+              <li class="person">
+              <section class="part">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-xs-2">
+                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-xs-8">
+                      <a target="{%  if URL_CLICK_TO_CALL %} _blank {% endif %}" href="{%  if URL_CLICK_TO_CALL %} {% url 'phonebook_call' num=contact.phone %} {% endif %}">
+                         <h3>{{ contact.name }}</h3>
+                      </a>
+                    </div>
+                    <div class="col-xs-2 more">
+                      <a href="#"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="operation">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-xs-6">
+                          <a href="{% url 'phonebook_edit' contact_id=contact.id %}">
+                              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                              <p>修改</p>
+                          </a>
+                      </div>
+                      <div class="col-xs-6">
+                          <a href="{% url 'phonebook_delete' contact_id=contact.id %}">
+                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                             <p>删除</p>
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
+      <div class="clearfix"></div>
+    </div>
+
+</div>
+
+{% endblock %}

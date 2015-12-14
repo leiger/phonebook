@@ -1,0 +1,54 @@
+{% extends "phonebook/base/base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %} {% trans "登录" %} {% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static './css/login.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="mainPage">
+  <header class="header">
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12">
+            <h1>登录</h1>
+          </div>
+        </div>
+      </div>
+    </nav><!--导航条-->
+  </header><!--头部固定的导航加搜索-->
+
+  <div class="main3">
+
+    <section class="loginAvatar">
+      <div class="circle">
+        <span class="glyphicon glyphicon-user"></span>
+      </div>
+    </section>
+
+    <form action="{% url 'phonebook_login_page' %}" method="post">
+      {% csrf_token %}
+      {% if error %}
+        <div class="alert alert-danger">
+          {% trans "用户名或者密码错误！" %}
+        </div>
+      {% endif %}
+      <section class="loginForm">
+        <div class="input-group">
+          {{ login_form.username }}
+          {{ login_form.password }}
+        </div>
+      </section>
+      <section class="groupBtn">
+        <button class="btn btn-block resetBtn" type="reset">重置</button>
+        <button class="btn btn-block loginBtn" type="submit" style="margin-top: 0;">立即登录</button>
+      </section>
+    </form>
+
+  </div>
+</div>
+{% endblock %}
